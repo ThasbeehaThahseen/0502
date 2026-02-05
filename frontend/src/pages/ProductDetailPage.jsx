@@ -74,12 +74,8 @@ export const ProductDetailPage = () => {
     if (product && product.images && product.images[currentImageIndex]) {
       const currentImage = product.images[currentImageIndex];
       setSelectedColor(currentImage.color || null);
-      // Set selected size to first size of current image, or null
-      if (currentImage.sizes && currentImage.sizes.length > 0) {
-        setSelectedSize(currentImage.sizes[0]);
-      } else {
-        setSelectedSize(null);
-      }
+      // Reset selected size when image changes (user needs to select from dropdown)
+      setSelectedSize(null);
     }
   }, [currentImageIndex, product]);
 
