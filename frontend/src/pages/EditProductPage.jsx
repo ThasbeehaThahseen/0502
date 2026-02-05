@@ -141,11 +141,10 @@ export const EditProductPage = () => {
         color: img.color || ''
       })).filter(ic => ic.color);
 
-      // For existing products with old structure, create imageSizes from global sizes
-      // Assign all sizes to all images as default
+      // Extract sizes from each image, or fallback to global sizes for old products
       const imageSizes = (product.images || []).map((img, index) => ({
         imageIndex: index,
-        sizes: product.sizes || []
+        sizes: (img.sizes && img.sizes.length > 0) ? img.sizes : (product.sizes || [])
       }));
 
       setFormData({
