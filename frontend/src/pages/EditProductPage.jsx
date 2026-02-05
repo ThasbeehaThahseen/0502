@@ -563,13 +563,15 @@ export const EditProductPage = () => {
         is.sizes.forEach(size => allSizes.add(size));
       });
 
-      // Update images with their colors
+      // Update images with their colors AND sizes
       const updatedImages = formData.images.map((img, index) => {
         const colorData = formData.imageColors.find(ic => ic.imageIndex === index);
+        const sizesData = formData.imageSizes.find(is => is.imageIndex === index);
         return {
           url: img.url,
           is_primary: img.is_primary,
-          color: colorData ? colorData.color : (img.color || null)
+          color: colorData ? colorData.color : (img.color || null),
+          sizes: sizesData ? sizesData.sizes : []
         };
       });
 
