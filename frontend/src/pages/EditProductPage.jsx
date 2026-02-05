@@ -490,12 +490,18 @@ export const EditProductPage = () => {
         return formData.images.length >= 2;
       case 1: // Fabric
         return formData.fabric !== '';
-      case 2: // Available Colours (formerly Primary Color)
-        return formData.imageColors.length === formData.images.length && formData.imageColors.every(ic => ic.color);
+      case 2: // Available Colours (formerly Primary Color) - ONLY first image is mandatory
+        // At least the first image must have a color
+        if (formData.images.length === 0) return false;
+        const firstImageColor = formData.imageColors.find(ic => ic.imageIndex === 0);
+        return firstImageColor && firstImageColor.color;
       case 3: // Other Colors
         return true; // Optional step
-      case 4: // Sizes - now per image
-        return formData.imageSizes.length === formData.images.length && formData.imageSizes.every(is => is.sizes.length > 0);
+      case 4: // Sizes - ONLY first image is mandatory
+        // At least the first image must have sizes
+        if (formData.images.length === 0) return false;
+        const firstImageSizes = formData.imageSizes.find(is => is.imageIndex === 0);
+        return firstImageSizes && firstImageSizes.sizes.length > 0;
       case 5: // Item Details
         return formData.itemName && formData.shortDescription;
       case 6: // Detailed Description
