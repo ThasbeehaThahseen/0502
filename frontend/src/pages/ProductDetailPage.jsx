@@ -293,21 +293,32 @@ Could you please provide more details?`;
             {/* Available Sizes - Only show if current image has sizes */}
             {getCurrentImageSizes().length > 0 && (
               <div className="sizes-section">
-                <h3 className="section-heading">Available Sizes</h3>
-                <div className="sizes-grid">
-                  {getCurrentImageSizes().map(size => (
-                    <div 
-                      key={size} 
-                      className={`size-box ${selectedSize === size ? 'highlighted' : ''}`}
-                      onClick={() => handleSizeClick(size)}
-                      data-testid={`size-${size}`}
-                      style={{ cursor: 'pointer' }}
-                    >
-                      <Check size={16} className="check-icon" />
-                      <span>{size}</span>
-                    </div>
-                  ))}
-                </div>
+                <Label htmlFor="size-select" className="section-heading" style={{ display: 'block', marginBottom: '10px' }}>
+                  Available Sizes
+                </Label>
+                <Select 
+                  value={selectedSize || ''} 
+                  onValueChange={(value) => setSelectedSize(value)}
+                >
+                  <SelectTrigger 
+                    id="size-select"
+                    data-testid="size-dropdown"
+                    style={{ width: '100%', maxWidth: '300px' }}
+                  >
+                    <SelectValue placeholder="Select a size" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {getCurrentImageSizes().map(size => (
+                      <SelectItem 
+                        key={size} 
+                        value={size}
+                        data-testid={`size-option-${size}`}
+                      >
+                        {size}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
             )}
 
