@@ -122,19 +122,6 @@ Could you please provide more details?`;
     }
   };
 
-  // Handle size click - navigate to image with that size
-  const handleSizeClick = (size) => {
-    if (!product || !product.images) return;
-    
-    const imageIndex = product.images.findIndex(img => 
-      img.sizes && img.sizes.includes(size)
-    );
-    if (imageIndex >= 0) {
-      setCurrentImageIndex(imageIndex);
-      setSelectedSize(size);
-    }
-  };
-
   // Get unique colors from all images
   const getUniqueColors = () => {
     if (!product || !product.images) return [];
